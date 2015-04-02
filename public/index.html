@@ -5,20 +5,31 @@
 	<script type="text/javascript" src="chemo.js"></script>
 	<script type="text/javascript" src="angular.min.js"></script>
 	<script type="text/javascript" src="ngchem.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="glam.css">
 </head>
 <body ng-controller="chemoControl">
- <div ng-repeat="row in array" class="rows">
- 	<div ng-repeat="val in row" class="cols">
- 		<div class="box" ng-style="painter(val.val);">
- 		</div>
- 	</div>
- </div>
+<div class="everything">
+	<div class="gameon" ng-show="game">
+		<h1> Moves left: {{move}}</h1>
+		 <div ng-repeat="row in array" class="rows">
+		 	<div ng-repeat="val in row" class="cols">
+		 		<div class="box" ng-style="painter(val.val);">
+		 		</div>
+		 	</div>
+		 </div>
 
-<div class="paintboxes">
- <div ng-repeat="paint in paints" class="paintbox" ng-click="clicked(paint.val)" ng-style="painter(paint.val);">
- </div>
+		<div class="paintboxes">
+		 <div ng-repeat="paint in paints" class="paintbox" ng-click="clicked(paint.val)" ng-style="painter(paint.val);">
+		 </div>
+		</div>
+	</div>
+	<div class="win" ng-show="win">
+		CONGRATS
+	</div>
+	<div class="gameoff" ng-show="lose">
+		GAME OVER
+	</div>
 </div>
-
 </body>
 </html>

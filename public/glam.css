@@ -1,5 +1,8 @@
 body{
 	background-color: white;
+	font-family: 'Press Start 2P', cursive;
+}
+div.everything{
 }
 div.rows{
 	display: block;
@@ -12,9 +15,16 @@ div.box{
 div.paintboxes{
 	display: block;
 	clear: both;
+	border:none;
 }
 div.paintbox{
 	width: 90px;
 	height: 80px;
 	float: left;
+}
+div.gameoff{
+	font-size: 150pt;
+}
+div.win{
+	font-size: 80pt;
 }

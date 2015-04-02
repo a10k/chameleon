@@ -9,7 +9,7 @@
  */
 
 l = function() { return console.log.apply(console, arguments); };
-l("Chemeleon Game!!");
+//l("Chemeleon Game!!");
 
 
 
@@ -20,6 +20,7 @@ var CONF_N = 15;// size of 2d
 var CONF_M = 15;// size of 2d
 var CONF_P = 5;// number of paints used
 var CONF_PLIST = ["#FFFF2A","#F8171B","#B3DBDB","#C8F526","#003300","#E599E5"];
+var CONF_MAXMOVES = 30;
 //
 
 
@@ -94,7 +95,14 @@ chemist.nm.makenm(chemist.nm.n,chemist.nm.m);
 
 // The game
 chemist.game = {};
+chemist.game.moves = [];
+chemist.game.maxmoves = CONF_MAXMOVES;
+chemist.game.win = 0;
+
 chemist.game.update = function(arg){
+	//inc moves
+	chemist.game.moves.push("arg");
+	//set the top one as adj by default
 	var top = chemist.nm.array[0][0];
 	top.adj = 1;
 
@@ -129,6 +137,8 @@ chemist.game.update = function(arg){
 		};
 	};
 
+
+
 	//paint all adj blocks
 	for (var i = 0; i <= chemist.nm.n - 1; i++) {
 		for (var j = 0; j <= chemist.nm.m - 1; j++) {
@@ -138,4 +148,25 @@ chemist.game.update = function(arg){
 			};
 		};
 	};
+
+
+	//win condition
+	var win = 0;
+	for (var i = 0; i <= chemist.nm.n - 1; i++) {
+		for (var j = 0; j <= chemist.nm.m - 1; j++) {
+			if (chemist.nm.array[i][j].val !== arg) {
+				win = win + 1;
+			};
+		};
+	};
+	if (win == 0) {
+		return 2;
+	};
+
+
+
+	// max moves reached warn
+	if (chemist.game.moves.length == chemist.game.maxmoves){
+		return 1;
+	}
 }
