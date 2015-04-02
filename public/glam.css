@@ -1,0 +1,15 @@
+body{
+	background-color: red;
+}
+div.rows{
+	display: block;
+	float: left;
+}
+div.box{
+	width: 50px;
+	height: 50px;
+	background-color: yellow;
+	border:solid;
+	text-align: center;
+	font-size: 20pt;
+}

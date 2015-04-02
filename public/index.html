@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="chemo">
+<head>
+	<title>Chemeleon Game</title>
+	<script type="text/javascript" src="chemo.js"></script>
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="ngchem.js"></script>
+	<link rel="stylesheet" type="text/css" href="glam.css">
+</head>
+<body ng-controller="chemoControl">
+ <div ng-repeat="row in array" class="rows">
+ 	<div ng-repeat="val in row" class="cols">
+ 		<div class="box">{{val.val}}</div>
+ 	</div>
+ </div>
+
+</body>
+</html>
