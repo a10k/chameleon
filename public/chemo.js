@@ -16,10 +16,10 @@ l("Chemeleon Game!!");
 /*
  * CONFIGURATION
  */
-var CONF_N = 7;// size of 2d 
-var CONF_M = 7;// size of 2d
-var CONF_P = 6;// number of paints used
-var CONF_PLIST = [];
+var CONF_N = 15;// size of 2d 
+var CONF_M = 15;// size of 2d
+var CONF_P = 5;// number of paints used
+var CONF_PLIST = ["#FFFF2A","#F8171B","#B3DBDB","#C8F526","#003300","#E599E5"];
 //
 
 
@@ -31,6 +31,24 @@ var chemist = {};
 // Paint store
 chemist.p = {};
 chemist.p.count = CONF_P;
+chemist.p.array = [];
+chemist.p.paintslist = CONF_PLIST;
+
+chemist.p.paint = function(arg){
+	return chemist.p.paintslist[arg];
+}
+
+chemist.p.populate = function(){
+	/* This function to populate an array of paints
+	*/
+	for (var i = 0; i <= chemist.p.count -1; i++) {
+		var tmp = {};
+		tmp.val = i;
+		tmp.color = chemist.p.paint(i);
+		chemist.p.array.push(tmp);
+	};
+}
+chemist.p.populate();
 chemist.p.random = function(){
 	/* This function returns a random number within the range,
 	 * this random number is the key for resolving the color
@@ -57,12 +75,12 @@ chemist.nm.makenm = function (n,m){
 	for (var i = 0; i <= n - 1; i++) {
 		//first create a blank row
 		var tmprow = [];
-		for (var j = 0; j <= m -1; j++) {
+		for (var j = 0; j <= m - 1; j++) {
 			//create elements inside the row
 			var tmp = {};
 			tmp.row = i;
 			tmp.col = j;
-			tmp.abj = 0;
+			tmp.adj = 0;
 			tmp.val = chemist.p.random();
 			// add element to row
 			tmprow.push(tmp);
@@ -73,3 +91,51 @@ chemist.nm.makenm = function (n,m){
 }
 chemist.nm.makenm(chemist.nm.n,chemist.nm.m);
 //
+
+// The game
+chemist.game = {};
+chemist.game.update = function(arg){
+	var top = chemist.nm.array[0][0];
+	top.adj = 1;
+
+	// mark all adjecent blocks
+	for (var i = 0; i <= chemist.nm.n - 1; i++) {
+		for (var j = 0; j <= chemist.nm.m - 1; j++) {
+			if (chemist.nm.array[i][j].adj == 1) {
+
+				var color = chemist.nm.array[i][j].val;
+				// check for the four adjecent sides
+				//top
+				if (i > 0 && chemist.nm.array[i - 1][j] && chemist.nm.array[i - 1][j].val == color ) {
+					chemist.nm.array[i - 1][j].adj = 1;
+					//l("top");
+				}
+				//left
+				if (j > 0 && chemist.nm.array[i][j - 1] && chemist.nm.array[i][j - 1].val == color ) {
+					chemist.nm.array[i][j - 1].adj = 1;
+					//l("left");
+				}
+				//right
+				if (j < (chemist.nm.m - 1) && chemist.nm.array[i][j + 1] && chemist.nm.array[i][j + 1].val == color ) {
+					chemist.nm.array[i][j + 1].adj = 1;
+					//l("right");
+				}
+				//bottom
+				if (i < (chemist.nm.n - 1) && chemist.nm.array[i + 1][j] && chemist.nm.array[i + 1][j].val == color ) {
+					chemist.nm.array[i + 1][j].adj = 1;
+					//l("bottom");
+				}
+			};
+		};
+	};
+
+	//paint all adj blocks
+	for (var i = 0; i <= chemist.nm.n - 1; i++) {
+		for (var j = 0; j <= chemist.nm.m - 1; j++) {
+			if (chemist.nm.array[i][j].adj == 1) {
+				chemist.nm.array[i][j].val = arg;
+				chemist.nm.array[i][j].adj = 0;
+			};
+		};
+	};
+}

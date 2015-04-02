@@ -16,27 +16,13 @@ angular.module('chemo', []);
 function chemoControl($scope, $http) {
 	
     $scope.array = chemist.nm.array;
-	/*
- 	$scope.refreshView = function(){
- 		$scope.adder = 1;
-		$scope.checked = 1;
- 		$scope.rooms ={};
- 		$scope.people = {};
- 		$scope.notif = {};
-		var temp = {
-			"id":$scope.fbUser
-		};
-
- 		$http.post('../notifications',temp).success(function(data) {
- 			$scope.notif = data;
- 		});	
-
- 		$http.post('../tenants',temp).success(function(data) {
- 			$scope.people = data;
- 		});
- 		$http.post('../rooms',temp).success(function(data) {
- 			$scope.rooms = data;
- 		});
- 	}*/
+    $scope.paints = chemist.p.array;
+    $scope.clicked = function(arg){
+    	l("Clicked on " + arg );
+    	chemist.game.update(arg);
+    }
+    $scope.painter = function(arg){
+    	return {"background-color": chemist.p.paint(arg)}
+    }
 
 }

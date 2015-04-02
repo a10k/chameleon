@@ -10,9 +10,15 @@
 <body ng-controller="chemoControl">
  <div ng-repeat="row in array" class="rows">
  	<div ng-repeat="val in row" class="cols">
- 		<div class="box">{{val.val}}</div>
+ 		<div class="box" ng-style="painter(val.val);">
+ 		</div>
  	</div>
  </div>
+
+<div class="paintboxes">
+ <div ng-repeat="paint in paints" class="paintbox" ng-click="clicked(paint.val)" ng-style="painter(paint.val);">
+ </div>
+</div>
 
 </body>
 </html>
