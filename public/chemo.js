@@ -20,7 +20,7 @@ var CONF_N = 25;// size of 2d
 var CONF_M = 25;// size of 2d
 var CONF_P = 6;// number of paints used
 var CONF_PLIST = ["#FFFF2A","#F8171B","#B3DBDB","#C8F526","#003300","#E599E5"];
-var CONF_MAXMOVES = 30;
+var CONF_MAXMOVES = 40;
 //
 
 
