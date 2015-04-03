@@ -8,19 +8,10 @@ div.rows{
 	display: block;
 	float: left;
 }
-div.box{
-	width: 27px;
-	height: 27px;
-}
 div.paintboxes{
 	display: block;
 	clear: both;
 	border:none;
-}
-div.paintbox{
-	width: 90px;
-	height: 80px;
-	float: left;
 }
 div.gameoff{
 	font-size: 150pt;

@@ -14,13 +14,13 @@
 		<h1> Moves left: {{move}}</h1>
 		 <div ng-repeat="row in array" class="rows">
 		 	<div ng-repeat="val in row" class="cols">
-		 		<div class="box" ng-style="painter(val.val);">
+		 		<div class="box" ng-style="pixel(val);">
 		 		</div>
 		 	</div>
 		 </div>
 
 		<div class="paintboxes">
-		 <div ng-repeat="paint in paints" class="paintbox" ng-click="clicked(paint.val)" ng-style="painter(paint.val);">
+		 <div ng-repeat="paint in paints" class="paintbox" ng-click="clicked(paint.val)" ng-style="painter(paint);">
 		 </div>
 		</div>
 	</div>
