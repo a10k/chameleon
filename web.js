@@ -35,7 +35,25 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 
+//Schema for storing user records
+var userSchema = mongoo.Schema({
+    facebook         : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
+    chameleon : {
+    	score        : { type: Number, default: 0 },
+    	arcade       : { type: Number, default: 1 },
+    	rank         : { type: Number, default: 99999 }
+    }
+});
 
+
+//Connection and compilation
+ mongoo.connect('mongodb://chameleon:chameleon-open@alex.mongohq.com:10007/a10kfdb');
+ var User = mongoo.model('User', userSchema);
 
 //Functions for date range
  Date.prototype.addDays = function(days) {
@@ -60,16 +78,25 @@ app.use(passport.session()); // persistent login sessions
 
 
 
-app.post('/fbuserchk',function(req,res){
-	handleFBuser(req.body,res);
-})
-/*
+/* // DEBUG HANDLE 
  app.post('/',function(req,res){
  	console.log(req.body);
  	res.send(req.body);
  });*/
 
+app.post('/fbuserchk',function(req,res){
+	handleFBuser(req.body,res);
+})
 
+app.get('/start',function(req,res){
+	//console.log("test");
+	//handleFBuser({id:'abc',name:'test',token:'123',email:'test@example.com'},res);
+	res.redirect("Arcade.html");
+})
+
+app.post('/', function(req, res) {
+	res.redirect("index.html");
+});
 
 // Listeners
  var port = process.env.PORT || 8080;
@@ -99,7 +126,7 @@ var handleFBuser = function(profile,res){
 			newUser.facebook.email = profile.email;
 			newUser.save(function(err) {
 				if (err){return;}
-				console.log("Created user "+profile.name)
+				console.log("Created user " + profile.name)
 				res.send(profile.name);
 			});
 		}

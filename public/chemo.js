@@ -35,10 +35,6 @@ var conf = {
 // BUILD THE GAME !!
 
 chemeleonMaker = function(cnf,chemist){
-	l(cnf.comment + " BUILT!");
-
-	l(cnf);
-	l(chemist.conf);
 	//backup the conf!
 	chemist.conf = cnf;
 

@@ -8,6 +8,78 @@
 
 'use strict';
 angular.module('chemo', []);
+angular.module("userbook",[]);
+
+
+/*
+ * User book controls
+ *
+ */
+function userControl($scope, $http){
+	$scope.fbUser = null;
+	$scope.userAccessToken = null;
+	$scope.fbEmail = null;
+	$scope.fbName = null;
+
+	 //FB init
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1610782812470939',
+			xfbml      : true,
+			version    : 'v2.3'});
+		//   FB.ui({method: 'feed'}
+		
+		setInterval(function(){
+			FB.getLoginStatus(function(response) {
+			if (response.status === 'connected' ) {
+				if (!$scope.fbUser) {
+					var uid = response.authResponse.userID;
+					var accessToken = response.authResponse.accessToken;
+
+					$scope.fbUser = uid;
+					$scope.userAccessToken = accessToken;
+					$scope.facebookDone();
+				};
+			} 
+		 });
+
+		}, 1000);
+	};
+	//FB JS SDK
+	(function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+	 }(document, 'script', 'facebook-jssdk'));
+
+	//On successfull facebook login
+	$scope.facebookDone = function(){
+		var getUserInfoPath = "/"+$scope.fbUser;	
+		FB.api(getUserInfoPath, {fields:[ 'last_name','email','first_name']}, function(response) {
+			$scope.fbEmail = response.email;
+			$scope.fbName = response.first_name+" "+response.last_name;
+			$scope.finished();
+		});
+	}
+
+	//When everythign is done
+	$scope.finished = function(){
+		var temp = {
+			"email":$scope.fbEmail,
+			"id":$scope.fbUser,
+			"name":$scope.fbName,
+			"token":$scope.userAccessToken
+		};
+		$http.post('../fbuserchk',temp).success(function(data) {
+			document.getElementById("starter").style.display = "block";
+		});
+	}
+
+}
+
+
 /*
  * start  page ng controller
  *
