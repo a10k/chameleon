@@ -28,7 +28,22 @@ function userControl($scope, $http){
 			xfbml      : true,
 			version    : 'v2.3'});
 		//   FB.ui({method: 'feed'}
-		
+
+		//JS based login	
+		FB.login(function(response) {
+		   if (response.authResponse) {
+		     console.log('Loged in!');
+		     //FB.api('/me', function(response) {
+		      // console.log('Good to see you, ' + response.name + '.');
+		     //});
+		   } else {
+		     console.log('User cancelled login or did not fully authorize.');
+		   }
+		 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
+
+
+
+
 		setInterval(function(){
 			FB.getLoginStatus(function(response) {
 			if (response.status === 'connected' ) {
