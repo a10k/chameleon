@@ -20,6 +20,11 @@ h1.play a{
 
 
 div.everything{
+	margin-left: 35px;
+}
+div.header{
+	font-size: 25pt;
+	display: inline;
 }
 div.rows{
 	display: block;
