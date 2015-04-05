@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="userbook"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+	<meta property="og:image" content="https://ganesh-hostels.herokuapp.com/images/twlogo.png" />
+	<script src="/angular.min.js" ></script>
+	<script src="/ngchem.js"></script>
+	<link rel="icon" type="image/png" href="/images/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="glam.css">
+</head>
+
+
+<body ng-controller="userControl">
+<div id="fb-root"></div>
+<div align= "center" style="margin:40px">
+	<!--TITLE-->
+	<div class="maintitle">CHAMELEON</div>
+	<!--Insert the main image logo here -->
+	<img style="margin:0px" class="near" src="/images/ch_main.jpg"/>
+	<br>
+	<br>
+	<br><h1 class="play" id="starter" style="display:none"><a href="/start">Play </a></h1>
+	<br>
+	<br>
+	<br>
+	
+
+<div class="fb-login-button" data-max-rows="10" data-size="xlarge" data-show-faces="true" data-auto-logout-link="false" data-scope="manage_notifications,email,publish_actions,public_profile"></div>
+
+
+<div class="fb-share-button" data-href="https://apps.facebook.com/chameleon-game/" data-width="620" data-type="box_count"></div>
+	<!--Copyright-->
+<br>
+<br>
+<br>
+<div class="footer">&copy; Alok Pepakayala</div>
+</div>
+
+</body>
+</html>
