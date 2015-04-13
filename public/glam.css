@@ -36,7 +36,11 @@ div.paintboxes{
 	border:none;
 }
 div.gameoff{
-	font-size: 150pt;
+	font-size: 60pt;
+}
+div.gameoff a,div.win a{
+	text-decoration: none;
+	font-size: 20pt;
 }
 div.win{
 	font-size: 80pt;

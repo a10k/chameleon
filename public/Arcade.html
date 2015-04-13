@@ -10,11 +10,16 @@
 	<link rel="stylesheet" type="text/css" href="glam.css">
 </head>
 <body ng-controller="chemoControl">
-		<img src="/images/ch_s.png"/>
 		<div class="header">CHAMELEON</div>
+		<img src="/images/ch_s.png" width="70px" ng-repeat="life in lives"/>
 <div class="everything">
 	<div class="gameon" ng-show="game">
-		<h1> Moves left: {{move}}</h1>
+		<span>Level {{level}}</span>
+		<br>
+		<span>Score {{score}}</span>
+		<br>
+		<span>Moves {{move}}</span>
+		<br>
 		 <div ng-repeat="row in array" class="rows">
 		 	<div ng-repeat="val in row" class="cols">
 		 		<div class="box" ng-style="pixel(val);">
@@ -28,10 +33,14 @@
 		</div>
 	</div>
 	<div class="win" ng-show="win">
-		CONGRATS
+	<br><br>
+		CONGRATS<br>
+		<a href="Arcade.html">PLAY AGAIN</a>
 	</div>
 	<div class="gameoff" ng-show="lose">
-		GAME OVER
+	<br><br>
+		GAME OVER<br>
+		<a href="Arcade.html">PLAY AGAIN</a>
 	</div>
 </div>
 </body>

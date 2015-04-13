@@ -102,6 +102,8 @@ function userControl($scope, $http){
 function chemoControl($scope, $http) {
 
 	$scope.level = 1;
+	$scope.lives = [1,2,3];
+	$scope.score = 0;
 
 	var chemist = {};
 	var lvl1 = {
@@ -124,9 +126,20 @@ function chemoControl($scope, $http) {
 		CONF_PIXY :[27,27],
 		comment : " level 2"
 	}
+	var lvl3 = {
+		CONF_N :30,// size of 2d 
+		CONF_M :20,// size of 2d
+		CONF_P :2,// number of paints used
+		CONF_PLIST :["#FFFF2A","#F8171B","#B3DBDB","#C8F526","#003300","#E599E5"],
+		CONF_MAXMOVES :20,
+		CONF_BRUSH : [225,45],
+		CONF_PIXY :[15,15],
+		comment : " level 3"
+	}
+	var lvlconf = [lvl1,lvl2,lvl3];
 
-	$scope.loadlvl = function(lvlconf){
-		chemist = chemeleonMaker(lvlconf,{});
+	$scope.loadlvl = function(lvlnum){
+		chemist = chemeleonMaker(lvlconf[lvlnum - 1],{});
 		if (chemist.ready) {
 		    $scope.array = chemist.nm.array;
 		    $scope.paints = chemist.p.array;
@@ -137,22 +150,30 @@ function chemoControl($scope, $http) {
 		};
 	}
 	//load level 1
-	$scope.loadlvl(lvl1);
-	//$scope.loadlvl(lvl2);
+	$scope.loadlvl($scope.level);
 
 
     $scope.clicked = function(arg){
     	var ret = chemist.game.update(arg)
     	if(ret == 1){
-    		$scope.game = 0;
-    		$scope.lose = 1;
+    		//lost
+    		$scope.lives.pop();
+    		if ($scope.lives.length == 0) {
+	    		$scope.game = 0;
+	    		$scope.lose = 1;
+    		}else{
+    			$scope.loadlvl($scope.level);
+    		}
+
 
     	}else if (ret == 2){
+    		//won
+    		$scope.score = $scope.score + ($scope.level *(chemist.game.maxmoves - chemist.game.moves.length + 1));
     		$scope.game = 0;
     		$scope.win = 1;
     		$scope.level++;
-    		if ($scope.level == 2) {
-	    		$scope.loadlvl(lvl2);
+    		if ($scope.level <= lvlconf.length) {
+	    		$scope.loadlvl($scope.level);
     		};
     	}
     	$scope.move = chemist.game.maxmoves - chemist.game.moves.length;
