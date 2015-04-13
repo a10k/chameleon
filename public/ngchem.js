@@ -39,7 +39,7 @@ function userControl($scope, $http){
 		   } else {
 		     console.log('User cancelled login or did not fully authorize.');
 		   }
-		 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
+		 }, {scope: 'email,public_profile'});
 
 
 
@@ -55,7 +55,7 @@ function userControl($scope, $http){
 					$scope.userAccessToken = accessToken;
 					$scope.facebookDone();
 				}else{
-					//JS based login	
+					/*JS based login	
 					FB.login(function(response) {
 					   if (response.authResponse) {
 					     console.log('Loged in!');
@@ -66,6 +66,7 @@ function userControl($scope, $http){
 					     console.log('User cancelled login or did not fully authorize.');
 					   }
 					 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
+					*/
 				}
 			} 
 		 });
