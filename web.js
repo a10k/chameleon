@@ -52,7 +52,7 @@ var userSchema = mongoo.Schema({
 
 
 //Connection and compilation
- //mongoo.connect('mongodb://chameleon:chameleon-open@alex.mongohq.com:10007/a10kfdb');
+ mongoo.connect('mongodb://chameleon:chameleon-open@alex.mongohq.com:10007/a10kfdb');
  var User = mongoo.model('User', userSchema);
 
 //Functions for date range
