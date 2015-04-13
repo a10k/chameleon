@@ -26,7 +26,7 @@ function userControl($scope, $http){
 		FB.init({
 			appId      : '1610782812470939',
 			xfbml      : true,
-			version    : 'v2.2'});
+			version    : 'v2.3'});
 		//   FB.ui({method: 'feed'}
 
 		//JS based login	
@@ -39,7 +39,7 @@ function userControl($scope, $http){
 		   } else {
 		     console.log('User cancelled login or did not fully authorize.');
 		   }
-		 }, {scope: 'email,public_profile'});
+		 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
 
 
 
@@ -54,19 +54,6 @@ function userControl($scope, $http){
 					$scope.fbUser = uid;
 					$scope.userAccessToken = accessToken;
 					$scope.facebookDone();
-				}else{
-					/*JS based login	
-					FB.login(function(response) {
-					   if (response.authResponse) {
-					     console.log('Loged in!');
-					     //FB.api('/me', function(response) {
-					      // console.log('Good to see you, ' + response.name + '.');
-					     //});
-					   } else {
-					     console.log('User cancelled login or did not fully authorize.');
-					   }
-					 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
-					*/
 				}
 			} 
 		 });
@@ -83,19 +70,6 @@ function userControl($scope, $http){
 	 }(document, 'script', 'facebook-jssdk'));
 
 
-	//try login
-	$scope.tryLogin = function(){
-		FB.login(function(response) {
-		   if (response.authResponse) {
-		     console.log('Loged in!');
-		     //FB.api('/me', function(response) {
-		      // console.log('Good to see you, ' + response.name + '.');
-		     //});
-		   } else {
-		     console.log('User cancelled login or did not fully authorize.');
-		   }
-		 }, {scope: 'email,public_profile'});
-	}
 	//On successfull facebook login
 	$scope.facebookDone = function(){
 		var getUserInfoPath = "/"+$scope.fbUser;	
