@@ -90,7 +90,7 @@ function userControl($scope, $http){
 		};
 		$http.post('../fbuserchk',temp).success(function(data) {
 			document.getElementById("starter").style.display = "block";
-			$scope.waiter = 0;
+			document.getElementById("waiter").style.display = "none";
 		});
 	}
 
