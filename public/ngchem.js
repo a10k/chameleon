@@ -54,7 +54,19 @@ function userControl($scope, $http){
 					$scope.fbUser = uid;
 					$scope.userAccessToken = accessToken;
 					$scope.facebookDone();
-				};
+				}else{
+					//JS based login	
+					FB.login(function(response) {
+					   if (response.authResponse) {
+					     console.log('Loged in!');
+					     //FB.api('/me', function(response) {
+					      // console.log('Good to see you, ' + response.name + '.');
+					     //});
+					   } else {
+					     console.log('User cancelled login or did not fully authorize.');
+					   }
+					 }, {scope: 'manage_notifications,email,publish_actions,public_profile'});
+				}
 			} 
 		 });
 
