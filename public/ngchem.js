@@ -24,7 +24,7 @@ function userControl($scope, $http){
 	 //FB init
 	window.fbAsyncInit = function() {
 		FB.init({
-			appId      : '1610782812470939',
+			appId      : '339752426234788',
 			xfbml      : true,
 			version    : 'v2.3'});
 		//   FB.ui({method: 'feed'}
